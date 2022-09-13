@@ -22,5 +22,10 @@ a {
   body {
     color: white;
     background: black;
+    font-family: "Nunito Sans", sans-serif;
   }
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
