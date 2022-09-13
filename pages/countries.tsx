@@ -1,12 +1,15 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import classNames from "classnames";
 import { HiMoon } from "react-icons/hi";
 import CountryTile from "../components/CountryTile/CountryTile";
+import { useGetCountries } from "../hooks/queries/useGetCountries";
 
 const Countries: NextPage = () => {
   const [darkMode, setDarkMode] = useState<boolean>(true);
+
+  const { data: countries, error } = useGetCountries();
 
   return (
     <div className={classNames(darkMode ? "dark" : "", "font-nunito")}>
@@ -21,26 +24,29 @@ const Countries: NextPage = () => {
           "bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white"
         )}
       >
-        <h4 className="px-14 py-4 font-semibold inline-block">
+        <h1 className="px-14 py-4 font-semibold text-xl inline-block">
           Where in the world?
-        </h4>
+        </h1>
         <button
           className="px-14 py-4 inline-block float-right"
           onClick={() => setDarkMode((darkMode) => !darkMode)}
         >
           <HiMoon className="inline-block mr-2 mt-1 align-top" />
-          Dark Mode
+          <span className="text-sm">Dark Mode</span>
         </button>
       </header>
 
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
-        <div className="grid grid-cols-4 gap-12">
-          <CountryTile />
-          <CountryTile />
-          <CountryTile />
-          <CountryTile />
-          <CountryTile />
-          <CountryTile />
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16 px-14 py-8">
+          {error ? (
+            <div>Error fetching data...</div>
+          ) : countries?.length ? (
+            countries?.map((country: any) => (
+              <CountryTile key={country.name} country={country} />
+            ))
+          ) : (
+            <div>Fetching data...</div>
+          )}
         </div>
       </main>
     </div>
