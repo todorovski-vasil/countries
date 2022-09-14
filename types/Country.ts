@@ -9,7 +9,7 @@ export interface Country {
   borders?: Array<string>;
   nativeName: string;
   topLevelDomain: Array<string>;
-  currencies: Array<{
+  currencies?: Array<{
     code: string;
     name: string;
     symbol: string;
@@ -20,8 +20,9 @@ export interface Country {
     name: string;
     nativeName: string;
   }>;
-  flags: {
-    svg: string;
+  flags?: {
+    svg?: string;
+    png?: string;
   };
-  flag: string;
+  flag?: string;
 }

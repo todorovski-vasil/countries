@@ -51,9 +51,9 @@ const CountryPage: NextPage = () => {
             <div className={classNames('grid grid-cols-1 md:grid-cols-2')}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={country.flag || country.flags?.svg}
+                src={country.flag || country.flags?.svg || country.flags?.png}
                 alt="unknown flag"
-                className="rounded-t-md"
+                className="shadow-2xl w-full"
               />
               <div className="md:ml-16">
                 <div className="pt-6 grid grid-cols-1">
@@ -91,9 +91,11 @@ const CountryPage: NextPage = () => {
                       />
                       <CountryDataPoint
                         label="Currencies"
-                        value={country.currencies
-                          .map((cur) => cur.name)
-                          .join(', ')}
+                        value={
+                          country.currencies
+                            ?.map((cur) => cur.name)
+                            .join(', ') || '/'
+                        }
                       />
                       <CountryDataPoint
                         label="Languages"

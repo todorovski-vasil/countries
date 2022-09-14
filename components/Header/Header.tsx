@@ -11,7 +11,7 @@ const Header: FC = () => {
     <header
       className={classNames(
         'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white',
-        'drop-shadow-xl'
+        'drop-shadow-lg'
       )}
     >
       <h1
