@@ -6,12 +6,29 @@ import classNames from 'classnames';
 import CountryTile from '../components/CountryTile/CountryTile';
 import Header from '../components/Header/Header';
 import { useGetCountries } from '../hooks/queries/useGetCountries';
+import DropDown from '../components/DropDown/DropDown';
+
+const regions = [
+  'Asia',
+  'Europe',
+  'Africa',
+  'Oceania',
+  'Americas',
+  'Polar',
+  'Antarctic Ocean',
+  'Antarctic',
+];
 
 const Countries: NextPage = () => {
   const { theme } = useTheme();
   const [searchInput, setSearchInput] = useState<string>('');
+  const [region, setRegion] = useState<string>('');
 
-  const { data: countries, error } = useGetCountries(searchInput);
+  const {
+    data: countries,
+    error,
+    isValidating,
+  } = useGetCountries(searchInput, region);
 
   return (
     <div
@@ -31,22 +48,37 @@ const Countries: NextPage = () => {
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
         <div className="pl-14 pt-12">
           <input
-            className="rounded-md h-12 w-1/3 px-4 dark:bg-dark-blue outline-none focus:outline-none drop-shadow-lg"
+            className={classNames(
+              'rounded-md h-12 w-1/3 px-4',
+              'outline-none focus:outline-none drop-shadow-lg'
+            )}
             value={searchInput}
             type="search"
             onInput={(event: any) => setSearchInput(event?.target?.value || '')}
             placeholder="Search for a country..."
           />
+
+          <DropDown
+            options={regions.map((region) => ({
+              value: region,
+              label: region,
+            }))}
+            placeholder="Filter by region"
+            selected={region}
+            onSelect={setRegion}
+          />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16 px-14 py-12">
           {error ? (
             <div>Error fetching data...</div>
+          ) : isValidating ? (
+            <div>Fetching data...</div>
           ) : countries?.length ? (
             countries?.map((country) => (
               <CountryTile key={country.name} country={country} />
             ))
           ) : (
-            <div>Fetching data...</div>
+            <div>No countries found!</div>
           )}
         </div>
       </main>
