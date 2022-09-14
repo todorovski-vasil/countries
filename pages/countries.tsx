@@ -2,10 +2,12 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useTheme } from 'next-themes';
 import { useState } from 'react';
+import { BiSearch } from 'react-icons/bi';
 import classNames from 'classnames';
 import CountryTile from '../components/CountryTile/CountryTile';
 import Header from '../components/Header/Header';
 import { useGetCountries } from '../hooks/queries/useGetCountries';
+import useDebounce from '../hooks/useDebounce';
 import DropDown from '../components/DropDown/DropDown';
 
 const regions = [
@@ -23,12 +25,13 @@ const Countries: NextPage = () => {
   const { theme } = useTheme();
   const [searchInput, setSearchInput] = useState<string>('');
   const [region, setRegion] = useState<string>('');
+  const debouncedSearchInput = useDebounce(searchInput, 300);
 
   const {
     data: countries,
     error,
     isValidating,
-  } = useGetCountries(searchInput, region);
+  } = useGetCountries(debouncedSearchInput, region);
 
   return (
     <div
@@ -47,16 +50,24 @@ const Countries: NextPage = () => {
 
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
         <div className="pl-14 pt-12">
-          <input
-            className={classNames(
-              'rounded-md h-12 w-1/3 px-4',
-              'outline-none focus:outline-none drop-shadow-lg'
-            )}
-            value={searchInput}
-            type="search"
-            onInput={(event: any) => setSearchInput(event?.target?.value || '')}
-            placeholder="Search for a country..."
-          />
+          <div className="relative inline-block h-12 w-full pr-14 md:w-1/2">
+            {/* <div className="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none"> */}
+            <BiSearch className="absolute inset-y-0 left-0 ml-4 mt-4 text-very-dark-blue dark:text-white pointer-events-none z-10" />
+            {/* </div> */}
+            <input
+              className={classNames(
+                'rounded-md h-12 w-full lg:w-2/3 px-4 pl-12',
+                'outline-none focus:outline-none drop-shadow-lg',
+                'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white'
+              )}
+              value={searchInput}
+              type="search"
+              onInput={(event: any) =>
+                setSearchInput(event?.target?.value || '')
+              }
+              placeholder="Search for a country..."
+            />
+          </div>
 
           <DropDown
             options={regions.map((region) => ({

@@ -25,16 +25,8 @@ export const useGetCountries = (search: string, region: string) => {
     : result;
 };
 
-export const useGetCountry = (code: string) => {
-  const url = `https://restcountries.com/v2/alpha/${code}`;
-
-  const { data, error } = useSWR<Country, any, any>(url, fetcher);
-
-  return { data, error };
-};
-
-export const useGetRegion = (region: string) =>
-  useSWR<Country, any>(
-    `https://restcountries.com/v2/region/${region}`,
+export const useGetCountry = (code: string) =>
+  useSWR<Country, any, any>(
+    `https://restcountries.com/v2/alpha/${code}`,
     fetcher
   );
