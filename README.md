@@ -8,7 +8,7 @@ The first page fetches all countries, and includes a search input and a filter b
 
 The application also has a dark mode which can be toggled with the button in top right part of the header.
 
-The application is deployed on Vercel and can be accessed on: [https://countries-ochre-gamma.vercel.app](https://countries-ochre-gamma.vercel.app)
+The application is deployed on Vercel and can be accessed on: [https://countries-ochre-gamma.vercel.app](https://countries-vasko16-gmailcom.vercel.app)
 
 ---
 
