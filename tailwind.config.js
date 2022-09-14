@@ -14,7 +14,7 @@ module.exports = {
         'midnight-blue': 'hsl(207, 26%, 17%)', // Very Dark Blue (Dark Mode Background)
         'very-dark-blue': 'hsl(200, 15%, 8%)', // Very Dark Blue (Light Mode Text)
         'dark-gray-input': 'hsl(0, 0%, 52%)', // Dark Gray (Light Mode Input)
-        'very-light-gray': 'hsl(0, 0%, 94%)', // Very Light Gray (Light Mode Background)
+        'very-light-gray': 'hsl(0, 0%, 98%)', // Very Light Gray (Light Mode Background)
         white: 'hsl(0, 0%, 100%)', // White (Dark Mode Text & Light Mode Elements)
       },
     },

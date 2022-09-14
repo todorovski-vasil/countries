@@ -1,4 +1,5 @@
 import { FC, useEffect, useState } from 'react';
+import Router from 'next/router';
 import classNames from 'classnames';
 import { HiMoon, HiOutlineMoon } from 'react-icons/hi';
 
@@ -19,10 +20,14 @@ const Header: FC<HeaderProps> = ({ updateDarkMode }) => {
   return (
     <header
       className={classNames(
-        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white'
+        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white',
+        'drop-shadow-xl'
       )}
     >
-      <h1 className="px-14 py-4 font-semibold text:md md:text-xl inline-block">
+      <h1
+        className="px-14 py-4 font-semibold text:md md:text-xl inline-block"
+        onClick={() => Router.push('/countries')}
+      >
         Where in the world?
       </h1>
       <button

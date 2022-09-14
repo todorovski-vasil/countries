@@ -1,19 +1,7 @@
 import { FC, useState } from 'react';
 import Router from 'next/router';
 import classNames from 'classnames';
-
-interface Country {
-  name: string;
-  population: number;
-  region: string;
-  capital: string;
-  alpha2Code: string;
-  alpha3Code: string;
-  flags: {
-    svg: string;
-  };
-  flag: string;
-}
+import { Country } from '../../types/Country';
 
 interface CountryTyleProps {
   country: Country;
@@ -23,9 +11,10 @@ const CountryTile: FC<CountryTyleProps> = ({ country }) => {
   return (
     <div
       className={classNames(
-        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white rounded-md'
+        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white rounded-md',
+        'drop-shadow-lg'
       )}
-      onClick={() => Router.push(`/country/${country.name}`)}
+      onClick={() => Router.push(`/country/${country.alpha3Code}`)}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
