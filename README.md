@@ -1,3 +1,15 @@
+This is simple two page application that displays info about countries fetched from [REST Countries V2 API](https://restcountries.com/#api-endpoints-v2).
+
+The first page fetches all countries, and includes a search input and a filter by region. Clicking on the country tile will open a new page which displays detailed data about that country. The detailed view contains multiple navigation options:
+
+- clicking on any of the border countries takes you to the detailed page about that country
+- clicking on the back button takes you to the previous page
+- clicking on the "Where in the world?" title in the header takes you to the home page
+
+The application also has a dark mode which can be toggled with the button in top right part of the header.
+
+---
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

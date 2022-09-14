@@ -1,20 +1,28 @@
-import type { NextPage } from 'next';
+import type { GetServerSidePropsContext, NextPage } from 'next';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
 import { useTheme } from 'next-themes';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import classNames from 'classnames';
-import { useGetCountry } from '../../hooks/queries/useGetCountries';
+import { useGetCountry, fetcher } from '../../hooks/queries/useGetCountries';
 import Header from '../../components/Header/Header';
 import CountryDataPoint from '../../components/CountryDataPoint/CountryDataPoint';
+import { Country } from '../../types/Country';
 
-const CountryPage: NextPage = () => {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const code = context.params?.code;
+  const data = await fetcher(`https://restcountries.com/v2/alpha/${code}`);
+
+  return { props: { fallbackData: data, code } };
+}
+
+const CountryPage: NextPage<{ fallbackData: Country; code: string }> = ({
+  fallbackData,
+  code,
+}) => {
   const router = useRouter();
-  const { code } = router.query;
-
   const { theme } = useTheme();
-
-  const { data: country, error } = useGetCountry(code as string);
+  const { data: country, error } = useGetCountry(code as string, fallbackData);
 
   return (
     <div

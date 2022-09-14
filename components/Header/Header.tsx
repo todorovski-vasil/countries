@@ -16,7 +16,7 @@ const Header: FC = () => {
     >
       <h1
         className="px-14 py-4 font-semibold text:md md:text-xl inline-block"
-        onClick={() => Router.push('/countries')}
+        onClick={() => Router.push('/')}
       >
         Where in the world?
       </h1>

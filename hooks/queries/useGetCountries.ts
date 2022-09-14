@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 import { Country } from '../../types/Country';
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json());
+export const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 export const useGetCountries = (search: string, region: string) => {
   const url = region.length
@@ -25,8 +25,9 @@ export const useGetCountries = (search: string, region: string) => {
     : result;
 };
 
-export const useGetCountry = (code: string) =>
+export const useGetCountry = (code: string, fallbackData: Country) =>
   useSWR<Country, any, any>(
     `https://restcountries.com/v2/alpha/${code}`,
-    fetcher
+    fetcher,
+    { fallbackData }
   );
