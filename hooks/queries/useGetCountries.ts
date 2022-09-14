@@ -1,10 +1,12 @@
-import useSWR from "swr";
+import useSWR from 'swr';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-const url = "https://restcountries.com/v2/all";
+export const useGetCountries = (search: string) => {
+  const url = search?.length
+    ? `https://restcountries.com/v2/name/${search}`
+    : 'https://restcountries.com/v2/all';
 
-export const useGetCountries = () => {
   const { data, error } = useSWR(url, fetcher);
 
   return { data, error };

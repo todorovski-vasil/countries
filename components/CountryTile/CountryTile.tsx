@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import Router from 'next/router';
 import classNames from 'classnames';
 
 interface Country {
@@ -6,6 +7,8 @@ interface Country {
   population: number;
   region: string;
   capital: string;
+  alpha2Code: string;
+  alpha3Code: string;
   flags: {
     svg: string;
   };
@@ -20,10 +23,16 @@ const CountryTile: FC<CountryTyleProps> = ({ country }) => {
   return (
     <div
       className={classNames(
-        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white'
+        'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white rounded-md'
       )}
+      onClick={() => Router.push(`/country/${country.name}`)}
     >
-      <img src={country.flag || country.flags.svg} alt="unknown flag" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={country.flag || country.flags.svg}
+        alt="unknown flag"
+        className="rounded-t-md"
+      />
       <div className="p-6">
         <div className="mb-4 font-semibold text-xl">{country.name || '/'}</div>
         <div className="text-sm">
