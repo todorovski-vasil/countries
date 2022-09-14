@@ -1,21 +1,11 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import Router from 'next/router';
+import { useTheme } from 'next-themes';
 import classNames from 'classnames';
 import { HiMoon, HiOutlineMoon } from 'react-icons/hi';
 
-interface HeaderProps {
-  updateDarkMode?: any;
-}
-
-const Header: FC<HeaderProps> = ({ updateDarkMode }) => {
-  const [darkMode, setDarkMode] = useState<boolean>(
-    typeof window !== 'undefined' &&
-      window.localStorage.getItem('darkMode') === 'true'
-  );
-
-  useEffect(() => {
-    updateDarkMode ? updateDarkMode(darkMode) : null;
-  }, [darkMode]);
+const Header: FC = () => {
+  const { theme, setTheme } = useTheme();
 
   return (
     <header
@@ -32,14 +22,9 @@ const Header: FC<HeaderProps> = ({ updateDarkMode }) => {
       </h1>
       <button
         className="px-14 py-4 inline-block float-right outline-none focus:outline-none"
-        onClick={() =>
-          setDarkMode((darkMode) => {
-            localStorage.setItem('darkMode', darkMode ? 'false' : 'true');
-            return !darkMode;
-          })
-        }
+        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
-        {darkMode ? (
+        {theme === 'dark' ? (
           <HiMoon className="inline-block mr-2 mt-1 align-top" />
         ) : (
           <HiOutlineMoon className="inline-block mr-2 mt-1 align-top" />

@@ -1,5 +1,6 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useTheme } from 'next-themes';
 import { useState } from 'react';
 import classNames from 'classnames';
 import CountryTile from '../components/CountryTile/CountryTile';
@@ -7,7 +8,7 @@ import Header from '../components/Header/Header';
 import { useGetCountries } from '../hooks/queries/useGetCountries';
 
 const Countries: NextPage = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(true);
+  const { theme } = useTheme();
   const [searchInput, setSearchInput] = useState<string>('');
 
   const { data: countries, error } = useGetCountries(searchInput);
@@ -15,7 +16,7 @@ const Countries: NextPage = () => {
   return (
     <div
       className={classNames(
-        darkMode ? 'dark bg-midnight-blue' : 'bg-very-light-gray',
+        theme === 'dark' ? 'dark bg-midnight-blue' : 'bg-very-light-gray',
         'font-nunito min-h-screen'
       )}
     >
@@ -25,7 +26,7 @@ const Countries: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <Header updateDarkMode={setDarkMode} />
+      <Header />
 
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
         <div className="pl-14 pt-12">

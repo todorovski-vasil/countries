@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Router, { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useTheme } from 'next-themes';
 import { BsArrowLeftShort } from 'react-icons/bs';
 import classNames from 'classnames';
 import { useGetCountry } from '../../hooks/queries/useGetCountries';
@@ -12,17 +12,14 @@ const CountryPage: NextPage = () => {
   const router = useRouter();
   const { code } = router.query;
 
-  const [darkMode, setDarkMode] = useState<boolean>(
-    typeof window !== 'undefined' &&
-      window.localStorage.getItem('darkMode') === 'true'
-  );
+  const { theme } = useTheme();
 
   const { data: country, error } = useGetCountry(code as string);
 
   return (
     <div
       className={classNames(
-        darkMode ? 'dark bg-midnight-blue' : 'bg-very-light-gray',
+        theme === 'dark' ? 'dark bg-midnight-blue' : 'bg-very-light-gray',
         'font-nunito min-h-screen'
       )}
     >
@@ -32,13 +29,7 @@ const CountryPage: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {/* <style jsx global>{`
-        body {
-          background: ${darkMode ? 'darkslategray' : 'antiquewhite'};
-        }
-      `}</style> */}
-
-      <Header updateDarkMode={setDarkMode} />
+      <Header />
 
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
         <button
@@ -52,6 +43,7 @@ const CountryPage: NextPage = () => {
           <BsArrowLeftShort className="inline-block" />
           <span className="text-sm px-2">Back</span>
         </button>
+
         <div className="px-14 py-12">
           {error ? (
             <div>Error fetching data...</div>
