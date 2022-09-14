@@ -8,6 +8,8 @@ The first page fetches all countries, and includes a search input and a filter b
 
 The application also has a dark mode which can be toggled with the button in top right part of the header.
 
+The application is deployed on Vercel and can be accessed on: [https://countries-ochre-gamma.vercel.app](https://countries-ochre-gamma.vercel.app)
+
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

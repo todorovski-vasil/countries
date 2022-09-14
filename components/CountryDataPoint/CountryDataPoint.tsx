@@ -11,7 +11,7 @@ const CountryDataPoint: FC<CountryDataPointProps> = ({
   value,
   type = 'text',
 }) => (
-  <div className="text-sm mb-1">
+  <div className="mb-1">
     <b>{`${label}: `}</b>
     {type === 'text' ? value : value}
   </div>

@@ -15,13 +15,13 @@ const Header: FC = () => {
       )}
     >
       <h1
-        className="px-14 py-4 font-semibold text:md md:text-xl inline-block"
+        className="pl-10 md:pl-14 py-4 font-semibold text-sm md:text-xl  inline-block"
         onClick={() => Router.push('/')}
       >
         Where in the world?
       </h1>
       <button
-        className="px-14 py-4 inline-block float-right outline-none focus:outline-none"
+        className="pr-10 md:pr-14 py-4 inline-block float-right outline-none focus:outline-none"
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       >
         {theme === 'dark' ? (

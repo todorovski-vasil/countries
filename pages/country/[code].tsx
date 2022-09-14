@@ -42,17 +42,17 @@ const CountryPage: NextPage<{ fallbackData: Country; code: string }> = ({
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
         <button
           className={classNames(
-            'inline-block px-8 py-1 ml-14 mt-10',
+            'inline-block px-8 py-1 ml-10 md:ml-14 mt-10',
             'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white',
             'rounded-md drop-shadow-lg'
           )}
           onClick={() => router.back()}
         >
           <BsArrowLeftShort className="inline-block" />
-          <span className="text-sm px-2">Back</span>
+          <span className="text-md px-2">Back</span>
         </button>
 
-        <div className="px-14 py-12">
+        <div className="px-10 md:px-14 py-12">
           {error ? (
             <div>Error fetching data...</div>
           ) : country ? (
@@ -70,7 +70,7 @@ const CountryPage: NextPage<{ fallbackData: Country; code: string }> = ({
                   </div>
                 </div>
                 <div>
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 text-md">
                     <div>
                       <CountryDataPoint
                         label="Native name"
@@ -117,7 +117,7 @@ const CountryPage: NextPage<{ fallbackData: Country; code: string }> = ({
                 <div className="pt-6">
                   {country.borders?.length ? (
                     <>
-                      <div className="mb-4 mr-2 font-semibold text-sm inline-block">
+                      <div className="mb-4 mr-2 font-semibold text-md inline-block">
                         Border Countries:
                       </div>
                       {country.borders?.map((border) => (
@@ -135,7 +135,7 @@ const CountryPage: NextPage<{ fallbackData: Country; code: string }> = ({
                       ))}
                     </>
                   ) : (
-                    <div className="mb-4 mr-2 font-semibold text-sm inline-block">
+                    <div className="mb-4 mr-2 font-semibold text-md inline-block">
                       No borders found!
                     </div>
                   )}

@@ -2,6 +2,7 @@ import { FC } from 'react';
 import Router from 'next/router';
 import classNames from 'classnames';
 import { Country } from '../../types/Country';
+import CountryDataPoint from '../CountryDataPoint/CountryDataPoint';
 
 interface CountryTyleProps {
   country: Country;
@@ -12,7 +13,7 @@ const CountryTile: FC<CountryTyleProps> = ({ country }) => {
     <div
       className={classNames(
         'bg-white text-very-dark-blue dark:bg-dark-blue dark:text-white rounded-md',
-        'drop-shadow-lg'
+        'drop-shadow-lg text-md'
       )}
       onClick={() => Router.push(`/country/${country.alpha3Code}`)}
     >
@@ -20,22 +21,16 @@ const CountryTile: FC<CountryTyleProps> = ({ country }) => {
       <img
         src={country.flag || country.flags?.svg || country.flags?.png}
         alt="unknown flag"
-        className="rounded-t-md"
+        className="rounded-t-md w-full"
       />
-      <div className="p-6">
+      <div className="p-6 text-sm">
         <div className="mb-4 font-semibold text-xl">{country.name || '/'}</div>
-        <div className="text-sm">
-          <b>Population: </b>
-          {country.population.toLocaleString('en', { useGrouping: true })}
-        </div>
-        <div className="text-sm">
-          <b>Region: </b>
-          {country.region}
-        </div>
-        <div className="text-sm">
-          <b>Capital: </b>
-          {country.capital}
-        </div>
+        <CountryDataPoint
+          label="Population"
+          value={country.population.toLocaleString('en', { useGrouping: true })}
+        />
+        <CountryDataPoint label="Region" value={country.region} />
+        <CountryDataPoint label="Capital" value={country.capital} />
       </div>
     </div>
   );

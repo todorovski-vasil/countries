@@ -49,8 +49,8 @@ const Countries: NextPage = ({}) => {
       <Header />
 
       <main className="bg-very-light-gray text-very-dark-blue dark:bg-midnight-blue dark:text-white">
-        <div className="pl-14 pt-12">
-          <div className="relative inline-block h-12 w-full pr-14 md:w-1/2">
+        <div className="pl-10 md:pl-14 pt-12">
+          <div className="relative inline-block h-12 w-full pr-10 md:pr-14 md:w-1/2">
             <BiSearch className="absolute inset-y-0 left-0 ml-4 mt-4 text-very-dark-blue dark:text-white pointer-events-none z-10" />
             <input
               className={classNames(
@@ -77,7 +77,7 @@ const Countries: NextPage = ({}) => {
             onSelect={setRegion}
           />
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16 px-14 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-16 px-10 md:px-14 py-12">
           {error ? (
             <div>Error fetching data...</div>
           ) : isValidating ? (
